@@ -1,0 +1,13 @@
+# Maven
+target/
+
+# NetBeans
+nbproject/private/
+nbbuild/
+dist/
+
+# Logs
+*.log
+
+# macOS
+.DS_Store
