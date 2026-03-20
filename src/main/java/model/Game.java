@@ -10,7 +10,7 @@ package model;
  */
 public class Game {
     // id, title, platform, genre, status, rating, notes
-    private int id;
+    //private int id;
     private String title;
     private String platform;
     private String genre;
@@ -23,10 +23,10 @@ public class Game {
         
     }
     // Constructor with Parameters
-    public Game(int id, String title, String platform, String genre, 
+    public Game(String title, String platform, String genre, 
             String status, double rating, String notes) {
         
-        this.id = id;
+        //this.id = id;
         this.title = title;
         this.platform = platform;
         this.genre = genre;
@@ -35,9 +35,9 @@ public class Game {
         this.notes = notes;
     }
     // Getters methods
-    public int getId() {
-        return id;
-    }
+//    public int getId() {
+//        return id;
+//    }
     
     public String getTitle() {
         return title;
@@ -64,9 +64,9 @@ public class Game {
     }
     
     // Setters methods
-    public void setId(int id) {
-        this.id = id;
-    }
+//    public void setId(int id) {
+//        this.id = id;
+//    }
     
     public void setTitle(String title) {
         this.title = title;
@@ -94,8 +94,7 @@ public class Game {
 
     @Override
     public String toString() {
-        return "Game{" + "id=" + id + ", title=" + title + 
-                ", platform=" + platform + ", genre=" + genre + 
-                ", status=" + status + ", rating=" + rating + ", notes=" + notes + '}';
+        return "Game{" + "title=" + title + ", platform=" + platform + ", genre=" + genre + ", status=" + status + ", rating=" + rating + ", notes=" + notes + '}';
     }
+    
 }
