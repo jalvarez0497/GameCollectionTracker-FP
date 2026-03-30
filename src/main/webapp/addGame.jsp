@@ -15,13 +15,27 @@
     
     <p>This page allows the user to add a new game to their collection</p>
     
-    <hr>
-    
-    <section>
+    <section id="addGameForm">
         
-        <form>
+        <form action="/AddGameServlet.java" method="post">
             <label for="gameTitle">Game Title:</label><br>
             <input type="text" for="gameTitle" id="title"><br>
+            
+            <label for="genres">Select game genre's:</label><br>
+            <input type="checkbox" for="genres" value="action">Action<br>
+            <input type="checkbox" for="genres" value="adventure">Adventure<br>
+            <input type="checkbox" for="genres" value="br">Battle Royale game's<br>
+            <input type="checkbox" for="genres" value="rpg">Role-playing games (RPG)<br>
+            <input type="checkbox" for="genres" value="shooter">Shooter<br>
+            <input type="checkbox" for="genres" value="simulation">Simulation<br>
+            <input type="checkbox" for="genres" value="strategy">Strategy<br>
+            <input type="checkbox" for="genres" value="sports">Sports<br>
+            <input type="checkbox" for="genres" value="survival">Survival<br>
+            <input type="checkbox" for="genres" value="racing">Racing<br>
+            <input type="checkbox" for="genres" value="platform">Platform<br>
+            <input type="checkbox" for="genres" value="puzzle">Puzzle<br>
+            <input type="checkbox" for="genres" value="fighting">Fighting<br>
+            
             
             <label for="platform">Platform:</label><br>
             
@@ -39,6 +53,28 @@
                 <option value="nintendo3ds">Nintendo 3DS</option>
                 <option value="switch">Nintendo Switch / Switch 2</option>
             </select>
+            
+            <br>
+            
+            <label for="status">Status:</label>
+            
+            <br>
+            
+            <select name="status" id="status">
+                <option value="default">---Game Status---</option>
+                <option value="completed">Completed</option>
+                <option value="notStarted">Haven't started</option>
+                <option value="startedNotFinish">Started, Not yet finished</option>
+            </select>
+            
+            <br>
+            
+            <label for="rating">Rating:</label><br>
+            <input type="text" for="rating" id="rating"><br>
+            
+            <label for="notes">Notes:</label><br>
+            <textarea name="notes" cols="40" rows="5"></textarea>
+<!--            <input type="text" for="notes" id="notes"><br>-->
             
             <label 
         </form>
