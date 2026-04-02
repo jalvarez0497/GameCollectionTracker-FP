@@ -23,6 +23,6 @@ public class ViewGamesServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        request.getRequestDispatcher("viewGames.jsp").forward(request, response);
+        request.getRequestDispatcher("/viewGames.jsp").forward(request, response);
     }
 }

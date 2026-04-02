@@ -29,11 +29,18 @@ public class AddGameServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        
         String title = request.getParameter("title");
-        String genre = request.getParameter("genre");
+        String[] genres = request.getParameterValues("genre");
         String platform = request.getParameter("platform");
         String status = request.getParameter("status");
         String notes = request.getParameter("notes");
+        
+        String genre = "";
+        
+        if (genres != null) {
+            genre = String.join(", ", genres);
+        }
 
         String ratingStr = request.getParameter("rating");
         double rating = 0.0;
@@ -41,8 +48,15 @@ public class AddGameServlet extends HttpServlet {
         if (ratingStr != null && !ratingStr.isEmpty()) {
             rating = Double.parseDouble(ratingStr);
         }
+        
+        String idStr = request.getParameter("id");
+        int id = 0;
 
-        Game game = new Game(title, genre, platform, status, rating, notes);
+        if (idStr != null && !idStr.isEmpty()) {
+            rating = Integer.parseInt(idStr);
+        }
+
+        Game game = new Game(id, title, platform, genre, status, rating, notes);
 
         HttpSession session = request.getSession();
 

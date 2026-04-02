@@ -17,30 +17,30 @@
     
     <section id="addGameForm">
         
-        <form action="/AddGameServlet.java" method="post">
+        <form action="${pageContext.request.contextPath}/addGame" method="post">
             <label for="gameTitle">Game Title:</label><br>
-            <input type="text" for="gameTitle" id="title"><br>
+            <input type="text" name="title" id="title"><br>
             
             <label for="genres">Select game genre's:</label><br>
-            <input type="checkbox" for="genres" value="action">Action<br>
-            <input type="checkbox" for="genres" value="adventure">Adventure<br>
-            <input type="checkbox" for="genres" value="br">Battle Royale game's<br>
-            <input type="checkbox" for="genres" value="rpg">Role-playing games (RPG)<br>
-            <input type="checkbox" for="genres" value="shooter">Shooter<br>
-            <input type="checkbox" for="genres" value="simulation">Simulation<br>
-            <input type="checkbox" for="genres" value="strategy">Strategy<br>
-            <input type="checkbox" for="genres" value="sports">Sports<br>
-            <input type="checkbox" for="genres" value="survival">Survival<br>
-            <input type="checkbox" for="genres" value="racing">Racing<br>
-            <input type="checkbox" for="genres" value="platform">Platform<br>
-            <input type="checkbox" for="genres" value="puzzle">Puzzle<br>
-            <input type="checkbox" for="genres" value="fighting">Fighting<br>
+            <input type="checkbox" name="genres" value="action">Action<br>
+            <input type="checkbox" name="genres" value="adventure">Adventure<br>
+            <input type="checkbox" name="genres" value="br">Battle Royale game's<br>
+            <input type="checkbox" name="genres" value="rpg">Role-playing games (RPG)<br>
+            <input type="checkbox" name="genres" value="shooter">Shooter<br>
+            <input type="checkbox" name="genres" value="simulation">Simulation<br>
+            <input type="checkbox" name="genres" value="strategy">Strategy<br>
+            <input type="checkbox" name="genres" value="sports">Sports<br>
+            <input type="checkbox" name="genres" value="survival">Survival<br>
+            <input type="checkbox" name="genres" value="racing">Racing<br>
+            <input type="checkbox" name="genres" value="platform">Platform<br>
+            <input type="checkbox" name="genres" value="puzzle">Puzzle<br>
+            <input type="checkbox" name="genres" value="fighting">Fighting<br>
             
             
             <label for="platform">Platform:</label><br>
             
             <select name="platform" id="platform">
-                <option value="default">---Choose a platform---</option>
+                <option value="" disabled selected>---Choose a platform---</option>
                 <option value="xbox">Xbox (Original)</option>
                 <option value="xbox360">Xbox 360</option>
                 <option value="xbox1">Xbox One</option>
@@ -61,22 +61,22 @@
             <br>
             
             <select name="status" id="status">
-                <option value="default">---Game Status---</option>
+                <option value="" disabled selected>---Game Status---</option>
                 <option value="completed">Completed</option>
                 <option value="notStarted">Haven't started</option>
-                <option value="startedNotFinish">Started, Not yet finished</option>
+                <option value="startedNotFinish">Started, not finished</option>
             </select>
             
             <br>
             
             <label for="rating">Rating:</label><br>
-            <input type="text" for="rating" id="rating"><br>
+            <input type="text" name="rating" id="rating"><br>
             
             <label for="notes">Notes:</label><br>
             <textarea name="notes" cols="40" rows="5"></textarea>
 <!--            <input type="text" for="notes" id="notes"><br>-->
-            
-            <label 
+<br><br>
+            <button type="submit">Add Game</button>
         </form>
         
     </section>

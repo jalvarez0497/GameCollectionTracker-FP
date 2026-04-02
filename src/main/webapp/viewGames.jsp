@@ -4,6 +4,9 @@
     Author     : xalvarezxpr
 --%>
 
+<%@page import="java.util.List" %>
+<%@page import="model.Game" %>
+
 <jsp:include page="includes/header.jsp">
     <jsp:param name="pageTitle" value="View Collection" />
 </jsp:include>
@@ -13,9 +16,50 @@
 <main>
     <h2>My Game Collection</h2>
     
-    <p>This page will display the list of games in the collection</p>
+    <%
+        List<Game> games = (List<Game>) session.getAttribute("games");
+    %>
     
-    <p>In here will be a table with all saved games.</p>
+    <%
+        if (games == null || games.isEmpty()) {
+    %>
+            <p>No games added yet.</p>
+    <%        
+        } else {
+    %>
+        <table border="1">
+            <tr>
+                <th>Title</th>
+                <th>Platform</th>
+                <th>Genre</th>
+                <th>Status</th>
+                <th>Rating</th>
+                <th>Notes</th>
+            </tr>
+            
+            <%
+                for (Game game : games) {
+            %>
+            <tr>
+                <td><%= game.getTitle() %></td>
+                <td><%= game.getPlatform() %></td>
+                <td><%= game.getGenre() %></td>
+                <td><%= game.getStatus() %></td>
+                <td><%= game.getRating() %></td>
+                <td><%= game.getNotes() %></td>
+            </tr>
+            <%
+                }
+            %>
+        </table>
+    <%
+        }
+    %>
+    
+    <br>
+    
+    <a href="addGame">Add Another Game</a>
+        
 </main>
 
 <jsp:include page="includes/footer.jsp" />
