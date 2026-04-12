@@ -9,8 +9,6 @@ package model;
  * @author xalvarezxpr
  */
 public class Game {
-    // id, title, platform, genre, status, rating, notes
-    //private int id;
     private int id;
     private String title;
     private String platform;

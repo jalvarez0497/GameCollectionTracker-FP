@@ -21,20 +21,20 @@
             <label for="gameTitle">Game Title:</label><br>
             <input type="text" name="title" id="title"><br>
             
-            <label for="genres">Select game genre's:</label><br>
-            <input type="checkbox" name="genres" value="action">Action<br>
-            <input type="checkbox" name="genres" value="adventure">Adventure<br>
-            <input type="checkbox" name="genres" value="br">Battle Royale game's<br>
-            <input type="checkbox" name="genres" value="rpg">Role-playing games (RPG)<br>
-            <input type="checkbox" name="genres" value="shooter">Shooter<br>
-            <input type="checkbox" name="genres" value="simulation">Simulation<br>
-            <input type="checkbox" name="genres" value="strategy">Strategy<br>
-            <input type="checkbox" name="genres" value="sports">Sports<br>
-            <input type="checkbox" name="genres" value="survival">Survival<br>
-            <input type="checkbox" name="genres" value="racing">Racing<br>
-            <input type="checkbox" name="genres" value="platform">Platform<br>
-            <input type="checkbox" name="genres" value="puzzle">Puzzle<br>
-            <input type="checkbox" name="genres" value="fighting">Fighting<br>
+            <label for="genre">Select game genre's:</label><br>
+            <input type="checkbox" name="genre" value="action">Action<br>
+            <input type="checkbox" name="genre" value="adventure">Adventure<br>
+            <input type="checkbox" name="genre" value="br">Battle Royale game's<br>
+            <input type="checkbox" name="genre" value="rpg">Role-playing games (RPG)<br>
+            <input type="checkbox" name="genre" value="shooter">Shooter<br>
+            <input type="checkbox" name="genre" value="simulation">Simulation<br>
+            <input type="checkbox" name="genre" value="strategy">Strategy<br>
+            <input type="checkbox" name="genre" value="sports">Sports<br>
+            <input type="checkbox" name="genre" value="survival">Survival<br>
+            <input type="checkbox" name="genre" value="racing">Racing<br>
+            <input type="checkbox" name="genre" value="platform">Platform<br>
+            <input type="checkbox" name="genre" value="puzzle">Puzzle<br>
+            <input type="checkbox" name="genre" value="fighting">Fighting<br>
             
             
             <label for="platform">Platform:</label><br>

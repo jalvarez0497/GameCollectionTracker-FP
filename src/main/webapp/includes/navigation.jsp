@@ -7,7 +7,7 @@
 <nav>
     <a href="index.jsp">Home</a> |
     <a href="addGame.jsp">Add Game</a> |
-    <a href="viewGames.jsp">View Game Collection</a>
+    <a href="viewGames">View Game Collection</a>
 </nav>
 
 <hr>

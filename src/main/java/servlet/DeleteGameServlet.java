@@ -5,32 +5,36 @@
 package servlet;
 
 import java.io.IOException;
-//import java.io.PrintWriter;
+import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
 
-import model.Game;
 import dao.GameDAO;
 
 /**
  *
  * @author xalvarezxpr
  */
-@WebServlet("/viewGames")
-public class ViewGamesServlet extends HttpServlet {
+@WebServlet("/deleteGame")
+public class DeleteGameServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        GameDAO gameDAO = new GameDAO();
-        ArrayList<Game> games = gameDAO.getAllGames();
+        String idStr = request.getParameter("id");
         
-        request.setAttribute("games", games);
-        request.getRequestDispatcher("/viewGames.jsp").forward(request, response);
+        if (idStr != null && !idStr.isEmpty()) {
+            int id = Integer.parseInt(idStr);
+            
+            GameDAO gameDAO = new GameDAO();
+            gameDAO.deleteGame(id);
+        }
+        
+        response.sendRedirect("viewGames");
     }
+
 }

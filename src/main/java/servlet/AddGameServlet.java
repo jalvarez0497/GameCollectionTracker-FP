@@ -9,11 +9,12 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
+//import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+//import java.util.ArrayList;
+//import java.util.List;
 import model.Game;
+import dao.GameDAO;
 
 @WebServlet("/addGame")
 public class AddGameServlet extends HttpServlet {
@@ -58,16 +59,14 @@ public class AddGameServlet extends HttpServlet {
 
         Game game = new Game(id, title, platform, genre, status, rating, notes);
 
-        HttpSession session = request.getSession();
-
-        List<Game> games = (List<Game>) session.getAttribute("games");
-        if (games == null) {
-            games = new ArrayList<>();
+        GameDAO gameDAO = new GameDAO();
+        boolean added = gameDAO.addGame(game);
+        
+        if (added) {
+            response.sendRedirect("viewGames");
+        } else {
+            request.setAttribute("errorMessage", "Unable to add game.");
+            request.getRequestDispatcher("addGame.jsp").forward(request, response);
         }
-
-        games.add(game);
-        session.setAttribute("games", games);
-
-        response.sendRedirect("viewGames");
     }
 }
