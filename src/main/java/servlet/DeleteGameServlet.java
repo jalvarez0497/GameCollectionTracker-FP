@@ -13,6 +13,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import dao.GameDAO;
+import jakarta.servlet.http.HttpSession;
 
 /**
  *
@@ -22,8 +23,15 @@ import dao.GameDAO;
 public class DeleteGameServlet extends HttpServlet {
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        HttpSession session = request.getSession(false);
+
+        if (session == null || session.getAttribute("loggedInUser") == null) {
+            response.sendRedirect("login");
+            return;
+        }
         
         String idStr = request.getParameter("id");
         
@@ -34,6 +42,13 @@ public class DeleteGameServlet extends HttpServlet {
             gameDAO.deleteGame(id);
         }
         
+        response.sendRedirect("viewGames");
+    }
+    
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
         response.sendRedirect("viewGames");
     }
 

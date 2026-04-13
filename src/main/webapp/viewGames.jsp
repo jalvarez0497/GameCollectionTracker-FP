@@ -10,6 +10,13 @@
     <jsp:param name="pageTitle" value="View Collection" />
 </jsp:include>
 
+<%
+    if (session == null || session.getAttribute("loggedInUser") == null) {
+        response.sendRedirect("login");
+        return;
+    }
+%>
+
 <jsp:include page="includes/navigation.jsp" />
 
 <main>
@@ -37,9 +44,12 @@
                     <td>${game.rating}</td>
                     <td>${game.notes}</td>
                     <td>
-                        <a href="deleteGame?id=${game.id}">Delete</a>
+                        <a href="updateGame?id=${game.id}"><button>Edit</button></a>
                         /
-                        <a href="updateGame?id=${game.id}">Update</a>
+                        <form action="deleteGame" method="post">
+                            <input type="hidden" name="id" value="${game.id}">
+                            <button type="submit">Delete</button>
+                        </form>
                     </td>
                 </tr>
             </c:forEach>

@@ -5,40 +5,31 @@
 package servlet;
 
 import java.io.IOException;
-//import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
-
-import model.Game;
-import dao.GameDAO;
 import jakarta.servlet.http.HttpSession;
 
 /**
  *
  * @author xalvarezxpr
  */
-@WebServlet("/viewGames")
-public class ViewGamesServlet extends HttpServlet {
+
+@WebServlet("/logout")
+public class LogoutServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         HttpSession session = request.getSession(false);
 
-        if (session == null || session.getAttribute("loggedInUser") == null) {
-            response.sendRedirect("login");
-            return;
+        if (session != null) {
+            session.invalidate();
         }
-        
-        GameDAO gameDAO = new GameDAO();
-        ArrayList<Game> games = gameDAO.getAllGames();
-        
-        request.setAttribute("games", games);
-        request.getRequestDispatcher("/viewGames.jsp").forward(request, response);
+
+        response.sendRedirect("login");
     }
 }

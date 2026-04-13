@@ -15,6 +15,7 @@ import java.io.IOException;
 //import java.util.List;
 import model.Game;
 import dao.GameDAO;
+import jakarta.servlet.http.HttpSession;
 
 @WebServlet("/addGame")
 public class AddGameServlet extends HttpServlet {
@@ -22,6 +23,13 @@ public class AddGameServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        HttpSession session = request.getSession(false);
+
+        if (session == null || session.getAttribute("loggedInUser") == null) {
+            response.sendRedirect("login");
+            return;
+        }
 
         request.getRequestDispatcher("addGame.jsp").forward(request, response);
     }
@@ -29,7 +37,13 @@ public class AddGameServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        HttpSession session = request.getSession(false);
 
+        if (session == null || session.getAttribute("loggedInUser") == null) {
+            response.sendRedirect("login");
+            return;
+        }
         
         String title = request.getParameter("title");
         String[] genres = request.getParameterValues("genre");

@@ -13,6 +13,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import dao.GameDAO;
+import jakarta.servlet.http.HttpSession;
 import model.Game;
 
 /**
@@ -26,6 +27,13 @@ public class UpdateGameServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        HttpSession session = request.getSession(false);
+
+        if (session == null || session.getAttribute("loggedInUser") == null) {
+            response.sendRedirect("login");
+            return;
+        }
         
         String idStr = request.getParameter("id");
         
@@ -45,8 +53,13 @@ public class UpdateGameServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        HttpSession session = request.getSession(false);
 
-        System.out.println("UPDATE POST HIT");
+        if (session == null || session.getAttribute("loggedInUser") == null) {
+            response.sendRedirect("login");
+            return;
+        }
         
         int id = Integer.parseInt(request.getParameter("id"));
         String title = request.getParameter("title");
@@ -74,14 +87,6 @@ public class UpdateGameServlet extends HttpServlet {
         game.setStatus(status);
         game.setRating(rating);
         game.setNotes(notes);
-        
-        System.out.println("ID: " + id);
-        System.out.println("Title: " + title);
-        System.out.println("Genre: " + genre);
-        System.out.println("Platform: " + platform);
-        System.out.println("Status: " + status);
-        System.out.println("Rating: " + rating);
-        System.out.println("Notes: " + notes);
 
         GameDAO gameDAO = new GameDAO();
         boolean updated = gameDAO.updateGame(game);

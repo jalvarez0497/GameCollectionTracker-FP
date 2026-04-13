@@ -8,6 +8,13 @@
     <jsp:param name="pageTitle" value="Add Game" />
 </jsp:include>
 
+<%
+    if (session == null || session.getAttribute("loggedInUser") == null) {
+        response.sendRedirect("login");
+        return;
+    }
+%>
+
 <jsp:include page="includes/navigation.jsp" />
 
 <main>

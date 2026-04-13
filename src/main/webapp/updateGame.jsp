@@ -6,6 +6,12 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="jakarta.tags.core" %>
+<%
+    if (session == null || session.getAttribute("loggedInUser") == null) {
+        response.sendRedirect("login");
+        return;
+    }
+%>
 <!DOCTYPE html>
 <html>
     <head>
