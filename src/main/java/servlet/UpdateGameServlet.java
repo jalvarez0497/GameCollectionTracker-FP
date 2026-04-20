@@ -67,17 +67,74 @@ public class UpdateGameServlet extends HttpServlet {
         String platform = request.getParameter("platform");
         String status = request.getParameter("status");
         String notes = request.getParameter("notes");
-
+        
+        if (title == null || title.trim().isEmpty()) {
+            request.setAttribute("errorMessage", "Title is required");
+            request.getRequestDispatcher("addGame.jsp").forward(request, response);
+            return;
+        }
+        
         String genre = "";
-        if (genres != null) {
-            genre = String.join(", ", genres);
+        
+        if (genres == null || genres.length == 0) {
+            request.setAttribute("errorMessage", "At least one genre is required.");
+            request.getRequestDispatcher("addGame.jsp").forward(request, response);
+            return;
+        }
+        
+        genre = String.join(", ", genres);
+        
+        if (platform == null || platform.trim().isEmpty()) {
+            request.setAttribute("errorMessage", "Platform is required");
+            request.getRequestDispatcher("addGame.jsp").forward(request, response);
+            return;
+        }
+        
+        if (status == null || status.trim().isEmpty()) {
+            request.setAttribute("errorMessage", "Status is required");
+            request.getRequestDispatcher("addGame.jsp").forward(request, response);
+            return;
         }
 
         String ratingStr = request.getParameter("rating");
         double rating = 0.0;
-        if (ratingStr != null && !ratingStr.isEmpty()) {
-            rating = Double.parseDouble(ratingStr);
+
+        try {
+            
+            if (ratingStr != null && !ratingStr.isEmpty()) {
+                rating = Double.parseDouble(ratingStr);
+                
+                if (rating < 0 || rating > 10) {
+                    request.setAttribute("errorMessage", "Rating must be between 0 and 10.");
+                    request.getRequestDispatcher("addGame.jsp").forward(request, response);
+                    return;
+                }
+            }
+            
+        } catch (NumberFormatException e) {
+            
+            request.setAttribute("errorMessage", "Rating must be a valid number.");
+            request.getRequestDispatcher("addGame.jsp").forward(request, response);
+            return;      
         }
+        
+        if (notes != null && notes.length() > 255) {
+            request.setAttribute("errorMessage", "Notes must be 255 character or less.");
+            request.getRequestDispatcher("addGame.jsp").forward(request, response);
+            return;
+        }
+        
+
+//        String genre = "";
+//        if (genres != null) {
+//            genre = String.join(", ", genres);
+//        }
+//
+//        String ratingStr = request.getParameter("rating");
+//        double rating = 0.0;
+//        if (ratingStr != null && !ratingStr.isEmpty()) {
+//            rating = Double.parseDouble(ratingStr);
+//        }
 
         Game game = new Game();
         game.setId(id);

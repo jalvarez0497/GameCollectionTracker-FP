@@ -50,28 +50,106 @@ public class AddGameServlet extends HttpServlet {
         String platform = request.getParameter("platform");
         String status = request.getParameter("status");
         String notes = request.getParameter("notes");
+        String ratingStr = request.getParameter("rating");
+        
+        if (title == null || title.trim().isEmpty()) {
+            request.setAttribute("errorMessage", "Title is required");
+            request.setAttribute("title", title);
+            request.setAttribute("platform", platform);
+            request.setAttribute("status", status);
+            request.setAttribute("notes", notes);
+            request.setAttribute("rating", ratingStr);
+            request.setAttribute("selectedGenres", genres);
+            request.getRequestDispatcher("addGame.jsp").forward(request, response);
+            return;
+        }
         
         String genre = "";
         
-        if (genres != null) {
-            genre = String.join(", ", genres);
-        }
-
-        String ratingStr = request.getParameter("rating");
-        double rating = 0.0;
-
-        if (ratingStr != null && !ratingStr.isEmpty()) {
-            rating = Double.parseDouble(ratingStr);
+        if (genres == null || genres.length == 0) {
+            request.setAttribute("errorMessage", "At least one genre is required.");
+            request.setAttribute("title", title);
+            request.setAttribute("platform", platform);
+            request.setAttribute("status", status);
+            request.setAttribute("notes", notes);
+            request.setAttribute("rating", ratingStr);
+            request.setAttribute("selectedGenres", genres);
+            request.getRequestDispatcher("addGame.jsp").forward(request, response);
+            return;
         }
         
-        String idStr = request.getParameter("id");
-        int id = 0;
-
-        if (idStr != null && !idStr.isEmpty()) {
-            rating = Integer.parseInt(idStr);
+        genre = String.join(", ", genres);
+        
+        if (platform == null || platform.trim().isEmpty()) {
+            request.setAttribute("errorMessage", "Platform is required");
+            request.setAttribute("title", title);
+            request.setAttribute("platform", platform);
+            request.setAttribute("status", status);
+            request.setAttribute("notes", notes);
+            request.setAttribute("rating", ratingStr);
+            request.setAttribute("selectedGenres", genres);
+            request.getRequestDispatcher("addGame.jsp").forward(request, response);
+            return;
+        }
+        
+        if (status == null || status.trim().isEmpty()) {
+            request.setAttribute("errorMessage", "Status is required");
+            request.setAttribute("title", title);
+            request.setAttribute("platform", platform);
+            request.setAttribute("status", status);
+            request.setAttribute("notes", notes);
+            request.setAttribute("rating", ratingStr);
+            request.setAttribute("selectedGenres", genres);
+            request.getRequestDispatcher("addGame.jsp").forward(request, response);
+            return;
         }
 
-        Game game = new Game(id, title, platform, genre, status, rating, notes);
+        double rating = 0.0;
+
+        try {
+            
+            if (ratingStr != null && !ratingStr.isEmpty()) {
+                rating = Double.parseDouble(ratingStr);
+                
+                if (rating < 0 || rating > 10) {
+                    request.setAttribute("errorMessage", "Rating must be between 0 and 10.");
+                    request.setAttribute("title", title);
+                    request.setAttribute("platform", platform);
+                    request.setAttribute("status", status);
+                    request.setAttribute("notes", notes);
+                    request.setAttribute("rating", ratingStr);
+                    request.setAttribute("selectedGenres", genres);
+                    request.getRequestDispatcher("addGame.jsp").forward(request, response);
+                    return;
+                }
+            }
+            
+        } catch (NumberFormatException e) {
+            
+            request.setAttribute("errorMessage", "Rating must be a valid number.");
+            request.setAttribute("title", title);
+            request.setAttribute("platform", platform);
+            request.setAttribute("status", status);
+            request.setAttribute("notes", notes);
+            request.setAttribute("rating", ratingStr);
+            request.setAttribute("selectedGenres", genres);
+            request.getRequestDispatcher("addGame.jsp").forward(request, response);
+            return;      
+        }
+        
+        if (notes != null && notes.length() > 255) {
+            request.setAttribute("errorMessage", "Notes must be 255 characters or less.");
+            request.setAttribute("title", title);
+            request.setAttribute("platform", platform);
+            request.setAttribute("status", status);
+            request.setAttribute("notes", notes);
+            request.setAttribute("rating", ratingStr);
+            request.setAttribute("selectedGenres", genres);
+            request.getRequestDispatcher("addGame.jsp").forward(request, response);
+            return;
+        }
+
+        Game game = new Game(title, platform, genre, status, rating, notes);
 
         GameDAO gameDAO = new GameDAO();
         boolean added = gameDAO.addGame(game);
@@ -80,6 +158,12 @@ public class AddGameServlet extends HttpServlet {
             response.sendRedirect("viewGames");
         } else {
             request.setAttribute("errorMessage", "Unable to add game.");
+            request.setAttribute("title", title);
+            request.setAttribute("platform", platform);
+            request.setAttribute("status", status);
+            request.setAttribute("notes", notes);
+            request.setAttribute("rating", ratingStr);
+            request.setAttribute("selectedGenres", genres);
             request.getRequestDispatcher("addGame.jsp").forward(request, response);
         }
     }

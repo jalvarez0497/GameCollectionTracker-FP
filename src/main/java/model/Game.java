@@ -22,10 +22,10 @@ public class Game {
         
     }
     // Constructor with Parameters
-    public Game(int id, String title, String platform, String genre, 
+    public Game(String title, String platform, String genre, 
             String status, double rating, String notes) {
         
-        this.id = id;
+        //this.id = id;
         this.title = title;
         this.platform = platform;
         this.genre = genre;
