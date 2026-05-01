@@ -1,0 +1,303 @@
+:root {
+    --bg-dark: #080d14;
+    --bg-card: rgba(24, 30, 42, 0.88);
+    --bg-nav: #0b1018;
+    --text-main: #f2f6ff;
+    --text-muted: #b8c2d1;
+    --cyan: #00e5ff;
+    --magenta: #ff2bd6;
+    --border-glow: rgba(255, 43, 214, 0.75);
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background: 
+        radial-gradient(circle at 0% 50%, rgba(255, 43, 214, 0.4), transparent 40%),
+        radial-gradient(circle at 100% 50%, rgba(0, 229, 255, 0.4), transparent 40%),
+        #080d14;
+    color: var(--text-main);
+}
+
+/* HEADER BANNER */
+header {
+    background-image:
+        linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)),
+        url("../images/gameStart.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 260px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 2px solid var(--magenta);
+}
+
+header h1 {
+    background: rgba(8, 13, 20, 0.65);
+    color: white;
+    padding: 14px 24px;
+    border-radius: 12px;
+    font-size: 2.2rem;
+    text-shadow: 0 0 10px var(--cyan), 0 0 14px var(--magenta);
+}
+
+/* NAV */
+.navbar {
+    background-color: var(--bg-nav);
+    border-bottom: 2px solid var(--magenta);
+    padding: 0;
+}
+
+.nav-links {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.nav-links a {
+    color: var(--text-main);
+    text-decoration: none;
+    font-weight: bold;
+    padding: 18px 20px;
+    border-bottom: 3px solid transparent;
+}
+
+.nav-links a:hover {
+    color: var(--magenta);
+    border-bottom: 3px solid var(--magenta);
+    background-color: rgba(255, 43, 214, 0.08);
+}
+
+.menu-toggle {
+    display: none;
+    background: linear-gradient(135deg, var(--magenta), var(--cyan));
+    color: white;
+    border: none;
+    padding: 10px 14px;
+    font-size: 20px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+/* MAIN CARD */
+main {
+    max-width: 1000px;
+    margin: 45px auto;
+    padding: 35px;
+    background: var(--bg-card);
+    border: 2px solid var(--border-glow);
+    border-radius: 14px;
+    box-shadow:
+        0 0 18px rgba(255, 43, 214, 0.45),
+        0 0 28px rgba(0, 229, 255, 0.22);
+    color: var(--text-main);
+}
+
+main h2,
+main h3 {
+    color: var(--text-main);
+}
+
+main p,
+main li {
+    color: var(--text-muted);
+    line-height: 1.5;
+}
+
+a {
+    color: var(--cyan);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+a:hover {
+    color: var(--magenta);
+    text-decoration: underline;
+}
+
+/* SECTION DIVIDERS */
+main section {
+    border-top: 1px solid rgba(255,255,255,0.18);
+    padding-top: 18px;
+    margin-top: 22px;
+}
+
+/* FORMS */
+form {
+    max-width: 650px;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="password"],
+select,
+textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 6px;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+    background-color: #111827;
+    color: white;
+    border: 1px solid #334155;
+    border-radius: 6px;
+}
+
+input[type="checkbox"] {
+    margin-top: 8px;
+}
+
+button,
+input[type="submit"] {
+    background: linear-gradient(135deg, var(--magenta), var(--cyan));
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button:hover,
+input[type="submit"]:hover {
+    opacity: 0.85;
+}
+
+/* TABLE */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: rgba(17, 24, 39, 0.95);
+}
+
+th {
+    background-color: #111827;
+    color: var(--cyan);
+}
+
+th, td {
+    padding: 10px;
+    border: 1px solid #374151;
+    text-align: left;
+    color: var(--text-main);
+}
+
+tr:nth-child(even) {
+    background-color: rgba(255, 255, 255, 0.04);
+}
+
+/* MESSAGES */
+.success-message {
+    color: #4ade80;
+    font-weight: bold;
+}
+
+.error-message {
+    color: #ff6b6b;
+    font-weight: bold;
+}
+
+/* ACTIONS */
+.delete-button {
+    background: #dc2626;
+}
+
+.delete-button:hover {
+    background: #b91c1c;
+}
+
+.update-link {
+    background: #16a34a;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 7px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.update-link:hover {
+    background: #15803d;
+}
+
+/* FOOTER */
+footer {
+    background-image:
+        linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)),
+        url("../images/gameOver.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    min-height: 190px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border-top: 2px solid var(--cyan);
+    color: white;
+}
+
+footer p {
+    background: rgba(8, 13, 20, 0.68);
+    padding: 8px 14px;
+    border-radius: 8px;
+    margin: 5px;
+    text-shadow: 0 0 8px black;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+    header {
+        background-image: none;
+        height: 90px;
+    }
+
+    header h1 {
+        font-size: 1.4rem;
+        padding: 10px 14px;
+    }
+
+    .navbar {
+        text-align: center;
+        padding: 10px;
+    }
+
+    .menu-toggle {
+        display: inline-block;
+    }
+
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        gap: 8px;
+        margin-top: 12px;
+    }
+
+    .nav-links.show {
+        display: flex;
+    }
+
+    .nav-links a {
+        width: 100%;
+        padding: 12px;
+    }
+
+    main {
+        margin: 20px;
+        padding: 22px;
+    }
+
+    footer {
+        background-image: none;
+        min-height: 90px;
+        padding: 20px;
+    }
+
+    footer p {
+        background: transparent;
+        box-shadow: none;
+        padding: 4px;
+    }
+}

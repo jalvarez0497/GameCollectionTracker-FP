@@ -1,25 +1,28 @@
 <%-- 
     Document   : updateGame
-    Created on : Apr 11, 2026, 3:03:54 PM
+    Created on : Apr 11, 2026, 3:03:54?PM
     Author     : xalvarezxpr
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="jakarta.tags.core" %>
+<%@taglib prefix="fn" uri="jakarta.tags.functions" %>
+
 <%
     if (session == null || session.getAttribute("loggedInUser") == null) {
         response.sendRedirect("login");
         return;
     }
 %>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Update Game Page</title>
-    </head>
-    <body>
-        <h1>Update Game Form</h1>
+
+<jsp:include page="includes/header.jsp" >
+    <jsp:param name="pageTitle" value="Update Game" />
+</jsp:include>
+<main>
+    <h1>Update Game Form</h1>
+        
+        <c:if test="${not empty errorMessage}">
+            <p class="error-message">${errorMessage}</p>
+        </c:if>
         
         <form action="${pageContext.request.contextPath}/updateGame" method="post">
             
@@ -29,50 +32,51 @@
             <input type="text" id="title" name="title" value="${game.title}" required>
             <br><br>
             
-            <label>Genre:</label>
+            <label>Genre:</label> <br>
             <input type="checkbox" name="genre" value="action"
-                   <c:if test="${game.genre != null && game.genre.contains('action')}">checked</c:if>>Action
+                   <c:if test="${game.genre != null && fn:contains(game.genre, 'action')}">checked</c:if>>Action <br>
             
             <input type="checkbox" name="genre" value="adventure"
-                   <c:if test="${game.genre != null && game.genre.contains('adventure')}">checked</c:if>>Adventure
+            <c:if test="${game.genre != null && fn:contains(game.genre, 'adventure')}">checked</c:if>>Adventure <br>
             
             <input type="checkbox" name="genre" value="br"
-                   <c:if test="${game.genre != null && game.genre.contains('br')}">checked</c:if>>Battle Royale game's
+            <c:if test="${game.genre != null && fn:contains(game.genre, 'br')}">checked</c:if>>Battle Royale game's <br>
             
             <input type="checkbox" name="genre" value="rpg"
-                   <c:if test="${game.genre != null && game.genre.contains('rpg')}">checked</c:if>>RPG
+            <c:if test="${game.genre != null && fn:contains(game.genre, 'rpg')}">checked</c:if>>RPG <br>
             
             <input type="checkbox" name="genre" value="shooter"
-                   <c:if test="${game.genre != null && game.genre.contains('shooter')}">checked</c:if>>Shooter
+            <c:if test="${game.genre != null && fn:contains(game.genre, 'shooter')}">checked</c:if>>Shooter <br>
             
             <input type="checkbox" name="genre" value="simulation"
-                   <c:if test="${game.genre != null && game.genre.contains('simulation')}">checked</c:if>>Simulation
+            <c:if test="${game.genre != null && fn:contains(game.genre, 'simulation')}">checked</c:if>>Simulation <br>
             
             <input type="checkbox" name="genre" value="strategy"
-                   <c:if test="${game.genre != null && game.genre.contains('strategy')}">checked</c:if>>Strategy
+            <c:if test="${game.genre != null && fn:contains(game.genre, 'strategy')}">checked</c:if>>Strategy <br>
             
             <input type="checkbox" name="genre" value="sport"
-                   <c:if test="${game.genre != null && game.genre.contains('sport')}">checked</c:if>>Sports
+            <c:if test="${game.genre != null && fn:contains(game.genre, 'sport')}">checked</c:if>>Sports <br>
             
             <input type="checkbox" name="genre" value="survival"
-                   <c:if test="${game.genre != null && game.genre.contains('survival')}">checked</c:if>>Survival
+            <c:if test="${game.genre != null && fn:contains(game.genre, 'survival')}">checked</c:if>>Survival <br>
             
             <input type="checkbox" name="genre" value="racing"
-                   <c:if test="${game.genre != null && game.genre.contains('racing')}">checked</c:if>>Racing
+            <c:if test="${game.genre != null && fn:contains(game.genre, 'racing')}">checked</c:if>>Racing <br>
             
             <input type="checkbox" name="genre" value="platform"
-                   <c:if test="${game.genre != null && game.genre.contains('platform')}">checked</c:if>>Platform
+            <c:if test="${game.genre != null && fn:contains(game.genre, 'platform')}">checked</c:if>>Platform <br>
             
             <input type="checkbox" name="genre" value="puzzle"
-                   <c:if test="${game.genre != null && game.genre.contains('puzzle')}">checked</c:if>>Puzzle
+            <c:if test="${game.genre != null && fn:contains(game.genre, 'puzzle')}">checked</c:if>>Puzzle <br>
             
             <input type="checkbox" name="genre" value="fighting"
-                   <c:if test="${game.genre != null && game.genre.contains('figthing')}">checked</c:if>>Fighting
+            <c:if test="${game.genre != null && fn:contains(game.genre, 'fighting')}">checked</c:if>>Fighting <br>
             
             <br><br>
             
             <label for="platform">Platform:</label>
             <select id="platform" name="platform" required>
+                <option value="" disabled <c:if test="${empty game.platform}">selected</c:if>>---Choose a platform---</option>
                 <option value="xbox" <c:if test="${game.platform == 'xbox'}">selected</c:if>>Xbox (Original)</option>
                 <option value="xbox360" <c:if test="${game.platform == 'xbox360'}">selected</c:if>>Xbox 360</option>
                 <option value="xbox1" <c:if test="${game.platform == 'xbox1'}">selected</c:if>>Xbox One</option>
@@ -90,6 +94,7 @@
             
             <label for="status">Status:</label>
             <select id="status" name="status" required>
+                <option value="" disabled <c:if test="${empty game.status}">selected</c:if>>---Game Status---</option>
                 <option value="completed" <c:if test="${game.status == 'completed'}">selected</c:if>>Completed</option>
                 <option value="notStarted" <c:if test="${game.status == 'notStarted'}">selected</c:if>>Haven't started</option>
                 <option value="startedNotFinish" <c:if test="${game.status == 'startedNotFinish'}">selected</c:if>>Started, not finished</option>
@@ -110,5 +115,6 @@
             <input type="submit" value="Update Game">
             
         </form>
-    </body>
-</html>
+</main>
+        
+<jsp:include page="includes/footer.jsp" />

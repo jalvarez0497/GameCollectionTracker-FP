@@ -39,6 +39,17 @@ public class ViewGamesServlet extends HttpServlet {
         ArrayList<Game> games = gameDAO.getAllGames();
         
         request.setAttribute("games", games);
+        
+        String message = request.getParameter("message");
+        
+        if ("added".equals(message)) {
+            request.setAttribute("successMessage", "Game added successfully.");
+        } else if ("updated".equals(message)) {
+            request.setAttribute("successMessage", "Game updated successfully.");
+        } else if ("deleted".equals(message)) {
+            request.setAttribute("successMessage", "Game deleted successfully.");
+        }
+        
         request.getRequestDispatcher("/viewGames.jsp").forward(request, response);
     }
 }

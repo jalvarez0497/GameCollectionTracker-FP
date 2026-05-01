@@ -4,12 +4,24 @@
     Author     : xalvarezxpr
 --%>
 
-<nav>
-    <a href="index.jsp">Home</a> |
-    <a href="login.jsp">Login</a> |
-    <a href="addGame">Add Game</a> |
-    <a href="viewGames">View Game Collection</a> |
-    <a href="${pageContext.request.contextPath}/logout">Logout</a>
+<nav class="navbar">
+    
+    <button class="menu-toggle" onclick="toggleMenu()">=</button>
+    
+    <div class="nav-links" id="navLinks">       
+        <a href="${pageContext.request.contextPath}/home">Home</a>
+        <a href="${pageContext.request.contextPath}/login">Login</a>
+        <a href="${pageContext.request.contextPath}/addGame">Add Game</a>
+        <a href="${pageContext.request.contextPath}/viewGames">View Game Collection</a>
+        <a href="${pageContext.request.contextPath}/logout">Logout</a>
+    </div>
+    
 </nav>
-
-<hr>
+    
+    <script>
+        function toggleMenu() {
+            document.getElementById("navLinks").classList.toggle("show");
+        }
+    </script>
+    
+    <hr>

@@ -1,11 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
+
 package servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -17,7 +13,7 @@ import jakarta.servlet.http.HttpSession;
 
 /**
  *
- * @author xalvarezxpr
+ * DeleteGameServlet handles the deletion of a game from the database.
  */
 @WebServlet("/deleteGame")
 public class DeleteGameServlet extends HttpServlet {
@@ -33,6 +29,7 @@ public class DeleteGameServlet extends HttpServlet {
             return;
         }
         
+        // Deleteing a game based on the game ID.
         String idStr = request.getParameter("id");
         
         if (idStr != null && !idStr.isEmpty()) {
@@ -42,7 +39,7 @@ public class DeleteGameServlet extends HttpServlet {
             gameDAO.deleteGame(id);
         }
         
-        response.sendRedirect("viewGames");
+        response.sendRedirect("viewGames?message=deleted");
     }
     
     @Override

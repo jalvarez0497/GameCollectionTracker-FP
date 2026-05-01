@@ -12,7 +12,8 @@
         <title>
             <%= request.getParameter("pageTitle") %> - Game Collection Tracker
         </title>
-        <!-- Add styling link in here!!!!! -->
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/styles.css">
+        
     </head>
     
     <body>

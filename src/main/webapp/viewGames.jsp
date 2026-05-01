@@ -6,10 +6,6 @@
 
 <%@taglib uri="jakarta.tags.core" prefix="c" %>
 
-<jsp:include page="includes/header.jsp">
-    <jsp:param name="pageTitle" value="View Collection" />
-</jsp:include>
-
 <%
     if (session == null || session.getAttribute("loggedInUser") == null) {
         response.sendRedirect("login");
@@ -17,10 +13,19 @@
     }
 %>
 
+<jsp:include page="includes/header.jsp">
+    <jsp:param name="pageTitle" value="View Collection" />
+</jsp:include>
+
+
 <jsp:include page="includes/navigation.jsp" />
 
 <main>
     <h2>My Game Collection</h2>
+    
+    <c:if test="${not empty successMessage}">
+        <p class="success-message">${successMessage}</p>
+    </c:if>
     
         <table border="1">
             <tr>
@@ -44,11 +49,11 @@
                     <td>${game.rating}</td>
                     <td>${game.notes}</td>
                     <td>
-                        <a href="updateGame?id=${game.id}"><button>Edit</button></a>
-                        /
+                        <a class="update-link" href="${pageContext.request.contextPath}/updateGame?id=${game.id}">Update</a>
+                        <br><br>
                         <form action="deleteGame" method="post">
                             <input type="hidden" name="id" value="${game.id}">
-                            <button type="submit">Delete</button>
+                            <button type="submit" class="delete-button">Delete</button>
                         </form>
                     </td>
                 </tr>

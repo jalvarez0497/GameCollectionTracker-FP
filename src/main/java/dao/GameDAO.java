@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package dao;
 
 import java.sql.Connection;
@@ -14,11 +11,11 @@ import model.Game;
 import util.DBConnection;
 
 /**
- *
- * @author xalvarezxpr
+ * GameDAO class handles all the database CRUD operations related to the game objects.
  */
 public class GameDAO {
     
+    // This method add a new game to the database
     public boolean addGame(Game game) {
         String sql = "INSERT INTO games (title, platform, genre, status, rating, notes) VALUES (?, ?, ?, ?, ?, ?)";
     
@@ -42,6 +39,7 @@ public class GameDAO {
         return false;
     }
     
+    // This method retrieves all the games storen in the database.
     public ArrayList<Game> getAllGames() {
         ArrayList<Game> games = new ArrayList<>();
         String sql = "SELECT * FROM games";
@@ -69,6 +67,7 @@ public class GameDAO {
         return games;
     }
     
+    // This method delets a game from the database using the game ID.
     public boolean deleteGame(int id) {
         String sql = "DELETE FROM games WHERE id = ?";
         
@@ -87,6 +86,7 @@ public class GameDAO {
         return false;
     }
     
+    // Retrieves a single game by their ID.
     public Game getGameById(int id) {
         String sql = "SELECT * FROM games WHERE id = ?";
         Game game = null;
@@ -116,6 +116,7 @@ public class GameDAO {
         return game;
     }
     
+    // This method updates an existing game.
     public boolean updateGame(Game game) {
         String sql = "UPDATE games SET title = ?, platform = ?, genre = ?, status = ?, rating = ?, notes = ? WHERE id = ?";
         
@@ -138,5 +139,105 @@ public class GameDAO {
         }
         
         return false;
+    }
+    
+    // This method retrieves the total amount of games stored in the database.
+    public int getTotalGames() {
+        String sql = "SELECT COUNT(*) FROM games";
+        
+        try (Connection connection = DBConnection.getConnection();
+                PreparedStatement ps = connection.prepareStatement(sql);
+                ResultSet rs = ps.executeQuery()) {
+            
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        
+        return 0;
+    }
+    
+    // This method returns the total amount of games with the 'completed' status.
+    public int getCompletedGames() {
+        String sql = "SELECT COUNT(*) FROM games WHERE status = 'completed'";
+        
+        try (Connection connection = DBConnection.getConnection();
+                PreparedStatement ps = connection.prepareStatement(sql);
+                ResultSet rs = ps.executeQuery()) {
+            
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        
+        return 0;
+    }
+    
+    // // This method returns the total amount of games with the 'startedNotFinish' status.
+    public int getStartedGames() {
+        String sql = "SELECT COUNT(*) FROM games WHERE status = 'startedNotFinish'";
+        
+        try (Connection connection = DBConnection.getConnection();
+                PreparedStatement ps = connection.prepareStatement(sql);
+                ResultSet rs = ps.executeQuery()) {
+            
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        
+        return 0;
+    }
+    
+    // This methods calculates the average game rating of all games.
+    public double getAverageRating() {
+        String sql = "SELECT AVG(rating) FROM games";
+        
+        try (Connection connection = DBConnection.getConnection();
+                PreparedStatement ps = connection.prepareStatement(sql);
+                ResultSet rs = ps.executeQuery()) {
+            
+            if (rs.next()) {
+                return rs.getDouble(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        
+        return 0;
+    }
+    
+    // This method returns the 5 recent game added to the database.
+    public ArrayList<Game> getRecentGames() {
+        ArrayList<Game> games = new ArrayList<>();
+        String sql = "SELECT * FROM games ORDER BY id DESC LIMIT 5";
+        
+        try (Connection connection = DBConnection.getConnection();
+                PreparedStatement ps = connection.prepareStatement(sql);
+                ResultSet rs = ps.executeQuery()) {
+            
+            while (rs.next()) {
+                Game game = new Game();
+                game.setId(rs.getInt("id"));
+                game.setTitle(rs.getString("title"));
+                game.setPlatform(rs.getString("platform"));
+                game.setGenre(rs.getString("genre"));
+                game.setStatus(rs.getString("status"));
+                game.setRating(rs.getDouble("rating"));
+                game.setNotes(rs.getString("notes"));
+                
+                games.add(game);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        
+        return games;
     }
 }      

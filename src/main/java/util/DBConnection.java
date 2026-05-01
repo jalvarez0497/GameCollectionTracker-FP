@@ -1,11 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 
 /**
- *
- * @author xalvarezxpr
+ * DBConnection class
+ * This class handles the connection to MySQL database using JDBC.
  */
 
 package util;
@@ -18,8 +14,9 @@ public class DBConnection {
 
     private static final String URL = "jdbc:mysql://localhost:3306/game_collection_tracker";
     private static final String USER = "root";
-    private static final String PASSWORD = "Alvarez#0497";
+    private static final String PASSWORD = "your_password_here";
 
+    // Establishes and returns a connection to the database.
     public static Connection getConnection() throws SQLException {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");

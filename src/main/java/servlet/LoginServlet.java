@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
+
 package servlet;
 
 import dao.UserDAO;
@@ -16,7 +13,7 @@ import model.User;
 
 /**
  *
- * @author xalvarezxpr
+ * The LoginServlet handles the user authentication and session creation.
  */
 
 @WebServlet("/login")
@@ -39,6 +36,7 @@ public class LoginServlet extends HttpServlet {
         UserDAO userDAO = new UserDAO();
         User user = userDAO.login(username, password);
 
+        // Validating user credentials.
         if (user != null) {
             HttpSession session = request.getSession();
             session.setAttribute("loggedInUser", user);

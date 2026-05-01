@@ -4,10 +4,6 @@
     Author     : xalvarezxpr
 --%>
 
-<jsp:include page="includes/header.jsp" >
-    <jsp:param name="pageTitle" value="Add Game" />
-</jsp:include>
-
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <%@ taglib prefix="fn" uri="jakarta.tags.functions" %>
 
@@ -18,7 +14,9 @@
     }
 %>
 
-
+<jsp:include page="includes/header.jsp" >
+    <jsp:param name="pageTitle" value="Add Game" />
+</jsp:include>
 
 <jsp:include page="includes/navigation.jsp" />
 
@@ -27,8 +25,8 @@
     
     <p>This page allows the user to add a new game to their collection</p>
     
-    <c:if test="${not empty erroMessage}">
-        <p style="color:red;">${errorMessage}</p>
+    <c:if test="${not empty errorMessage}">
+        <p class="error-message">${errorMessage}</p>
     </c:if>
     
     <section id="addGameForm">

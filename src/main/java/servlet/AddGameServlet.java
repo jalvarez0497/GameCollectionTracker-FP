@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
+
 package servlet;
 
 import jakarta.servlet.ServletException;
@@ -9,13 +6,14 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-//import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
-//import java.util.ArrayList;
-//import java.util.List;
 import model.Game;
 import dao.GameDAO;
 import jakarta.servlet.http.HttpSession;
+
+/*
+ * AddGameServlet display the add game form and process the form submissions.
+*/
 
 @WebServlet("/addGame")
 public class AddGameServlet extends HttpServlet {
@@ -25,7 +23,8 @@ public class AddGameServlet extends HttpServlet {
             throws ServletException, IOException {
         
         HttpSession session = request.getSession(false);
-
+        
+        // Ckecking if the user is logged in before allowing access.
         if (session == null || session.getAttribute("loggedInUser") == null) {
             response.sendRedirect("login");
             return;
@@ -45,6 +44,7 @@ public class AddGameServlet extends HttpServlet {
             return;
         }
         
+        // Retrieve the form parameters.
         String title = request.getParameter("title");
         String[] genres = request.getParameterValues("genre");
         String platform = request.getParameter("platform");
@@ -52,6 +52,7 @@ public class AddGameServlet extends HttpServlet {
         String notes = request.getParameter("notes");
         String ratingStr = request.getParameter("rating");
         
+        // Validating the form fields (title, genres, platform, status, and rating).
         if (title == null || title.trim().isEmpty()) {
             request.setAttribute("errorMessage", "Title is required");
             request.setAttribute("title", title);
@@ -106,6 +107,7 @@ public class AddGameServlet extends HttpServlet {
 
         double rating = 0.0;
 
+        // Changing rating from String to double and validating the rating ranges.
         try {
             
             if (ratingStr != null && !ratingStr.isEmpty()) {
@@ -149,13 +151,14 @@ public class AddGameServlet extends HttpServlet {
             return;
         }
 
+        // Creating a game object to save it to the database.
         Game game = new Game(title, platform, genre, status, rating, notes);
 
         GameDAO gameDAO = new GameDAO();
         boolean added = gameDAO.addGame(game);
         
         if (added) {
-            response.sendRedirect("viewGames");
+            response.sendRedirect("viewGames?message=added");
         } else {
             request.setAttribute("errorMessage", "Unable to add game.");
             request.setAttribute("title", title);
